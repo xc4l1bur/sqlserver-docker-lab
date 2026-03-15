@@ -1,26 +1,49 @@
 #!/bin/bash
 
-echo "Esperando SQL Server..."
-
-sleep 20
+SQLCMD="/opt/mssql-tools18/bin/sqlcmd"
+SERVER="localhost"
+USER="sa"
+PASSWORD="Password123!"
 
 BACKUP="/db/laboratorio.bak"
 ZIP="/db/laboratorio.zip"
 
+echo "--------------------------------------------"
+echo "Inicializando laboratorio SQL Server"
+echo "--------------------------------------------"
+
+echo "Esperando que SQL Server esté disponible..."
+
+until $SQLCMD -S $SERVER -U $USER -P $PASSWORD -Q "SELECT 1" &> /dev/null
+do
+  echo "SQL Server aún no está listo... esperando 5 segundos"
+  sleep 5
+done
+
+echo "SQL Server está listo."
+
+echo "--------------------------------------------"
+echo "Verificando backup..."
+echo "--------------------------------------------"
+
 if [ ! -f "$BACKUP" ]; then
-
-  echo "Descomprimiendo backup..."
-
+  echo "Backup no encontrado. Descomprimiendo laboratorio.zip..."
   unzip $ZIP -d /db
-
+else
+  echo "Backup ya existe."
 fi
 
-echo "Restaurando base de datos..."
+echo "--------------------------------------------"
+echo "Restaurando base de datos laboratorio..."
+echo "--------------------------------------------"
 
-/opt/mssql-tools/bin/sqlcmd \
--S localhost \
--U sa \
--P Password123! \
+$SQLCMD \
+-S $SERVER \
+-U $USER \
+-P $PASSWORD \
 -i /db/restore.sql
 
-echo "Base de datos lista."
+echo "--------------------------------------------"
+echo "Base de datos restaurada correctamente."
+echo "Laboratorio listo para usar."
+echo "--------------------------------------------"
