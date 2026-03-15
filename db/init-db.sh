@@ -4,34 +4,36 @@ SQLCMD="/opt/mssql-tools18/bin/sqlcmd"
 SERVER="localhost"
 USER="sa"
 PASSWORD="Password123!"
-
 BACKUP="/db/laboratorio.bak"
 
-echo "--------------------------------------"
+echo "-------------------------------------"
 echo "Inicializando laboratorio SQL Server"
-echo "--------------------------------------"
+echo "-------------------------------------"
 
-echo "Esperando SQL Server..."
+echo "Esperando que SQL Server esté disponible..."
 
 until $SQLCMD -S $SERVER -U $USER -P $PASSWORD -Q "SELECT 1" &> /dev/null
 do
-  echo "SQL Server aún no está listo..."
-  sleep 5
+    echo "SQL Server aún no está listo..."
+    sleep 5
 done
 
-echo "SQL Server listo."
+echo "SQL Server está listo."
 
-echo "--------------------------------------"
+echo "-------------------------------------"
 echo "Verificando backup..."
-echo "--------------------------------------"
+echo "-------------------------------------"
 
 if [ ! -f "$BACKUP" ]; then
-  echo "ERROR: No se encontró laboratorio.bak"
-  echo "Debe existir en la carpeta db/"
-  exit 1
+    echo "ERROR: No se encontró el archivo laboratorio.bak"
+    exit 1
 fi
 
-echo "Restaurando base de datos..."
+echo "Backup encontrado."
+
+echo "-------------------------------------"
+echo "Restaurando base de datos laboratorio"
+echo "-------------------------------------"
 
 $SQLCMD \
 -S $SERVER \
@@ -39,7 +41,6 @@ $SQLCMD \
 -P $PASSWORD \
 -i /db/restore.sql
 
-echo "--------------------------------------"
+echo "-------------------------------------"
 echo "Base de datos restaurada correctamente"
-echo "Laboratorio listo"
-echo "--------------------------------------"
+echo "-------------------------------------"
