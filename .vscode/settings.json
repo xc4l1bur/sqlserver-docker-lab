@@ -4,9 +4,15 @@
         "server": "localhost",
         "database": "laboratorio",
         "user": "sa",
-        "password": "Password123!",
+        "password": "",
         "authenticationType": "SqlLogin",
-        "port": 1433
+        "port": 1433,
+        "groupId": "ROOT",
+        "id": "9DB47D49-D96A-4E8A-90C0-BA5C50201C94",
+        "profileSource": 0,
+        "encrypt": "Mandatory",
+        "trustServerCertificate": true,
+        "containerName": "sqlserver-lab"
       }
     ]
   }
