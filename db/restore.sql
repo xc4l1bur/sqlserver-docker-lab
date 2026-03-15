@@ -11,8 +11,12 @@ GO
 RESTORE DATABASE laboratorio
 FROM DISK = '/db/laboratorio.bak'
 WITH 
-    MOVE 'laboratorio' TO '/var/opt/mssql/data/laboratorio.mdf',
-    MOVE 'laboratorio_log' TO '/var/opt/mssql/data/laboratorio_log.ldf',
+    MOVE 'piscis2021_prod' 
+        TO '/var/opt/mssql/data/laboratorio.mdf',
+
+    MOVE 'piscis2021_prod_log' 
+        TO '/var/opt/mssql/data/laboratorio_log.ldf',
+
     REPLACE,
     RECOVERY;
 GO
