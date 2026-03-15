@@ -1,0 +1,17 @@
+# OS
+.DS_Store
+
+# logs
+*.log
+
+# docker
+sqlserver_data
+
+# vscode
+.vscode/*.db
+.vscode/*.sqlite
+
+# temp
+tmp
+
+db/*.bak

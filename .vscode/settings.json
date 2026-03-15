@@ -1,0 +1,12 @@
+{
+    "mssql.connections": [
+      {
+        "server": "localhost",
+        "database": "laboratorio",
+        "user": "sa",
+        "password": "Password123!",
+        "authenticationType": "SqlLogin",
+        "port": 1433
+      }
+    ]
+  }
