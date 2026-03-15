@@ -1,71 +1,75 @@
-# Laboratorio SQL Server -- Base de Datos de Ventas
+# Laboratorio SQL Server – Sistema de Ventas
 
-Este repositorio contiene un laboratorio práctico para estudiantes que
-están comenzando en bases de datos relacionales utilizando **SQL
-Server** y **Docker**.
+Este repositorio contiene un **laboratorio práctico de bases de datos relacionales utilizando SQL Server**.
 
-La base de datos incluida ha sido **completamente anonimizada** y
-contiene únicamente **datos ficticios con fines académicos**.
+El laboratorio está diseñado para estudiantes que comienzan a trabajar con:
 
-------------------------------------------------------------------------
+- SQL
+- bases de datos relacionales
+- análisis de datos
+- consultas sobre múltiples tablas
+
+La base de datos incluida representa un **sistema de ventas tipo retail / punto de venta (POS)**.
+
+Todos los datos fueron **anonimizados completamente** y contienen únicamente **información ficticia con fines académicos**.
+
+---
 
 # Instalación del laboratorio
 
-Clonar el repositorio:
+## 1. Clonar el repositorio
 
-``` bash
+```bash
 git clone git@github-personal:xc4l1bur/sqlserver-docker-lab.git
 ```
 
-Entrar al proyecto:
+## 2. Entrar al proyecto
 
-``` bash
+```bash
 cd sqlserver-docker-lab
 ```
 
-Descomprimir la base de datos:
+## 3. Descomprimir la base de datos
 
-``` bash
+```bash
 cd db
 unzip laboratorio.zip
 cd ..
 ```
 
-Iniciar el contenedor de SQL Server:
+## 4. Iniciar el contenedor SQL Server
 
-``` bash
+```bash
 docker compose up -d
 ```
 
-Ver logs del contenedor:
+## 5. Ver logs del contenedor
 
-``` bash
+```bash
 docker compose logs -f
 ```
 
-Una vez iniciado el contenedor la base de datos **laboratorio** estará
-disponible.
+Una vez iniciado el contenedor, la base de datos **laboratorio** estará disponible.
 
-------------------------------------------------------------------------
+---
 
-# Descripción de la base de datos
+# Descripción del sistema
 
-La base representa un **sistema de ventas tipo retail / punto de venta
-(POS)**.
+La base de datos representa un sistema de ventas que permite simular operaciones reales de negocio:
 
-Permite simular operaciones como:
+- gestión de clientes
+- catálogo de productos
+- proveedores
+- inventario
+- ventas con tickets
+- movimientos de caja
+- usuarios del sistema
 
--   administración de clientes
--   control de productos
--   ventas con ticket
--   movimientos de caja
--   control de stock
--   proveedores
--   usuarios del sistema
+Esta estructura permite practicar **consultas SQL reales sobre un modelo de negocio completo**.
 
-------------------------------------------------------------------------
+---
 
-## Cantidad de registros por tabla
+# Tamaño de la base de datos
 
 | Tabla | Registros |
 |------|-----------|
@@ -95,197 +99,131 @@ Permite simular operaciones como:
 | tipo_dte | 8 |
 | usuario | 21 |
 
-------------------------------------------------------------------------
+---
 
-# Tablas principales
+# Documentación del modelo de datos
 
-## cliente
+La documentación técnica completa del modelo se encuentra en la carpeta `docs`.
 
-Contiene los clientes registrados en el sistema.
+## Modelo general
 
-Campos principales:
+Descripción completa del modelo relacional:
 
--   rut
--   razon_social
--   giro
--   direccion
--   email
--   telefono
+```
+docs/modelo_relacional.md
+```
 
-Registros: **1138**
+## Modelo por módulos
 
-------------------------------------------------------------------------
+Arquitectura del sistema agrupada por áreas funcionales:
 
-## producto
+```
+docs/modelo_modulos.md
+```
 
-Productos disponibles para venta.
+---
 
-Campos principales:
+# Documentación técnica por módulo
 
--   nombre
--   precio
--   categoria
--   impuesto
+Cada módulo del sistema tiene su propia documentación con:
 
-Registros: **11097**
+- descripción funcional
+- diagrama del módulo
+- diccionario técnico de tablas
+- campos, tipos de datos y claves
 
-------------------------------------------------------------------------
+| Módulo | Documento |
+|------|------|
+| Clientes | docs/modulo_clientes.md |
+| Productos | docs/modulo_productos.md |
+| Inventario | docs/modulo_inventario.md |
+| Ventas | docs/modulo_ventas.md |
+| Caja | docs/modulo_caja.md |
+| Seguridad | docs/modulo_seguridad.md |
 
-## ticket
+---
 
-Representa una venta realizada en el sistema.
+# Laboratorio SQL
 
-Campos principales:
+El repositorio incluye un laboratorio completo de consultas SQL progresivas.
+Se divide en 3 arhivos con niveles incrementales de complejidad.
 
--   fecha
--   cliente
--   sucursal
--   total
--   forma_pago
+Archivos:
 
-Registros: **368048**
+```
+docs/consultas_sql_laboratorio1.md
+docs/consultas_sql_laboratorio2.md
+```
 
-------------------------------------------------------------------------
+El laboratorio contiene ejercicios organizados por niveles:
 
-## ticket_linea
+| Nivel | Contenido |
+|------|-----------|
+| 1 | SELECT básicos |
+| 2 | WHERE, LIKE, BETWEEN |
+| 3 | ORDER BY, TOP, DISTINCT |
+| 4 | SUM, COUNT, AVG, GROUP BY |
+| 5 | CASE |
+| 6 | JOIN |
+| 7 | Subconsultas |
+| 8 | HAVING |
+| 9 | IN / EXISTS |
+| 10 | CTE |
+| 11 | Window Functions |
+| 12 | Análisis de negocio |
 
-Detalle de los productos vendidos en cada ticket.
+En total el laboratorio contiene **más de 180 ejercicios SQL**.
 
-Campos principales:
+---
 
--   ticket_id
--   producto_id
--   cantidad
--   precio
+# Proyecto Final
 
-Registros: **776767**
+El laboratorio culmina con un proyecto integrador donde los estudiantes deben analizar la información del sistema.
 
-------------------------------------------------------------------------
+Archivo:
 
-## caja
+```
+docs/consultas_sql_laboratorio3.md
+```
 
-Registros de apertura y cierre de caja.
+El proyecto incluye:
 
-Campos principales:
+- análisis de clientes
+- análisis de productos
+- análisis de ventas
+- análisis de inventario
+- análisis de categorías
+- consultas avanzadas
 
--   apertura_usuario
--   apertura_fechahora
--   apertura_monto
--   cierre_usuario
--   cierre_fechahora
--   cierre_monto
+El objetivo es aplicar **todos los conceptos aprendidos durante el laboratorio**.
 
-Registros: **4608**
-
-------------------------------------------------------------------------
-
-## caja_movimiento
-
-Movimientos financieros asociados a cada caja.
-
-Ejemplos:
-
--   ventas
--   devoluciones
--   ingresos
--   egresos
-
-Registros: **367320**
-
-------------------------------------------------------------------------
-
-## sucursal
-
-Sucursales donde se realizan las ventas.
-
-Campos principales:
-
--   nombre
--   direccion
--   telefono
--   comuna
-
-Registros: **4**
-
-------------------------------------------------------------------------
-
-## usuario
-
-Usuarios del sistema.
-
-Campos principales:
-
--   usuario
--   nombre
--   apellido
--   rol
-
-Registros: **21**
-
-------------------------------------------------------------------------
-
-# Relaciones principales
-
-El modelo utiliza claves foráneas para mantener integridad referencial.
-
-Ejemplos:
-
--   cliente → comuna
--   comuna → provincia
--   provincia → region
--   producto → proveedor
--   ticket → cliente
--   ticket_linea → producto
--   caja_movimiento → caja
-
-------------------------------------------------------------------------
+---
 
 # Propósito del laboratorio
 
-Esta base de datos está diseñada para practicar:
+Este repositorio fue creado para que los estudiantes puedan practicar:
 
--   consultas SQL básicas
--   JOIN entre tablas
--   agregaciones
--   análisis de ventas
--   subconsultas
--   funciones de agrupación
--   optimización de consultas
+- diseño de consultas SQL
+- uso de JOIN entre tablas
+- agregaciones y análisis de datos
+- subconsultas y CTE
+- funciones analíticas
+- generación de reportes de negocio
 
-------------------------------------------------------------------------
+---
 
-# Ejemplos de ejercicios para alumnos
+# Notas sobre los datos
 
-### Total de ventas por sucursal
+La base de datos fue **anonimizada completamente** para eliminar cualquier información personal real.
 
-``` sql
-SELECT sucursal_id, SUM(total)
-FROM ticket
-GROUP BY sucursal_id;
-```
+Todos los registros presentes son **ficticios y utilizados únicamente con fines educativos**.
 
-### Productos más vendidos
+---
 
-``` sql
-SELECT producto_id, SUM(cantidad)
-FROM ticket_linea
-GROUP BY producto_id
-ORDER BY SUM(cantidad) DESC;
-```
+# Tecnologías utilizadas
 
-### Ventas por cliente
-
-``` sql
-SELECT cliente_id, COUNT(*)
-FROM ticket
-GROUP BY cliente_id;
-```
-
-------------------------------------------------------------------------
-
-# Notas
-
-La base fue **anonimizada para eliminar datos personales reales**.
-
-Los datos presentes son **ficticios y se utilizan exclusivamente para
-aprendizaje**.
+- SQL Server
+- Docker
+- Docker Compose
+- Git
+- Markdown
