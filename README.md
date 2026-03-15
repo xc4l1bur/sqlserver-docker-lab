@@ -65,35 +65,35 @@ Permite simular operaciones como:
 
 ------------------------------------------------------------------------
 
-# Cantidad de registros por tabla
+## Cantidad de registros por tabla
 
-  Tabla                        Registros
-  ---------------------------- -----------
-  caja                         4608
-  caja_movimiento              367320
-  categoria                    48
-  cliente                      1138
-  comuna                       345
-  estado                       3
-  forma_pago                   3
-  impuesto                     1
-  ingreso_mercaderia           1299
-  ingreso_mercaderia_detalle   6512
-  medio_pago                   7
-  movimiento                   6
-  pagina                       22
-  producto                     11097
-  proveedor                    9
-  provincia                    53
-  region                       15
-  rol                          4
-  rol_pagina                   58
-  stock                        829804
-  sucursal                     4
-  ticket                       368048
-  ticket_linea                 776767
-  tipo_dte                     8
-  usuario                      21
+| Tabla | Registros |
+|------|-----------|
+| caja | 4608 |
+| caja_movimiento | 367320 |
+| categoria | 48 |
+| cliente | 1138 |
+| comuna | 345 |
+| estado | 3 |
+| forma_pago | 3 |
+| impuesto | 1 |
+| ingreso_mercaderia | 1299 |
+| ingreso_mercaderia_detalle | 6512 |
+| medio_pago | 7 |
+| movimiento | 6 |
+| pagina | 22 |
+| producto | 11097 |
+| proveedor | 9 |
+| provincia | 53 |
+| region | 15 |
+| rol | 4 |
+| rol_pagina | 58 |
+| stock | 829804 |
+| sucursal | 4 |
+| ticket | 368048 |
+| ticket_linea | 776767 |
+| tipo_dte | 8 |
+| usuario | 21 |
 
 ------------------------------------------------------------------------
 
