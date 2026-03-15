@@ -17,15 +17,13 @@ services:
       - sqlserver_data:/var/opt/mssql
       - ./db:/db
 
-    command: >
-      /bin/bash -c "
-      apt-get update &&
-      apt-get install -y unzip &&
-      /opt/mssql/bin/sqlservr &
-      sleep 25 &&
-      /db/init-db.sh &&
-      wait
-      "
+  command: >
+    /bin/bash -c "
+    /opt/mssql/bin/sqlservr &
+    sleep 25 &&
+    /db/init-db.sh &&
+    wait
+    "
 
 volumes:
   sqlserver_data:
