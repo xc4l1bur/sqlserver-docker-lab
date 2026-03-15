@@ -10,21 +10,11 @@ echo "-------------------------------------"
 echo "Inicializando laboratorio SQL Server"
 echo "-------------------------------------"
 
-echo "Esperando que SQL Server abra el puerto 1433..."
+echo "Esperando que SQL Server acepte conexiones..."
 
-until nc -z localhost 1433
+until $SQLCMD -S $SERVER -U $USER -P $PASSWORD -Q "SELECT 1" > /dev/null 2>&1
 do
     echo "SQL Server aún no está listo..."
-    sleep 5
-done
-
-echo "Puerto SQL abierto."
-
-echo "Esperando que SQL Server acepte consultas..."
-
-until $SQLCMD -S $SERVER -U $USER -P $PASSWORD -Q "SELECT 1" &> /dev/null
-do
-    echo "SQL Server aún no acepta consultas..."
     sleep 5
 done
 
