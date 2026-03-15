@@ -6,36 +6,32 @@ USER="sa"
 PASSWORD="Password123!"
 
 BACKUP="/db/laboratorio.bak"
-ZIP="/db/laboratorio.zip"
 
-echo "--------------------------------------------"
+echo "--------------------------------------"
 echo "Inicializando laboratorio SQL Server"
-echo "--------------------------------------------"
+echo "--------------------------------------"
 
-echo "Esperando que SQL Server esté disponible..."
+echo "Esperando SQL Server..."
 
 until $SQLCMD -S $SERVER -U $USER -P $PASSWORD -Q "SELECT 1" &> /dev/null
 do
-  echo "SQL Server aún no está listo... esperando 5 segundos"
+  echo "SQL Server aún no está listo..."
   sleep 5
 done
 
-echo "SQL Server está listo."
+echo "SQL Server listo."
 
-echo "--------------------------------------------"
+echo "--------------------------------------"
 echo "Verificando backup..."
-echo "--------------------------------------------"
+echo "--------------------------------------"
 
 if [ ! -f "$BACKUP" ]; then
-  echo "Backup no encontrado. Descomprimiendo laboratorio.zip..."
-  unzip $ZIP -d /db
-else
-  echo "Backup ya existe."
+  echo "ERROR: No se encontró laboratorio.bak"
+  echo "Debe existir en la carpeta db/"
+  exit 1
 fi
 
-echo "--------------------------------------------"
-echo "Restaurando base de datos laboratorio..."
-echo "--------------------------------------------"
+echo "Restaurando base de datos..."
 
 $SQLCMD \
 -S $SERVER \
@@ -43,7 +39,7 @@ $SQLCMD \
 -P $PASSWORD \
 -i /db/restore.sql
 
-echo "--------------------------------------------"
-echo "Base de datos restaurada correctamente."
-echo "Laboratorio listo para usar."
-echo "--------------------------------------------"
+echo "--------------------------------------"
+echo "Base de datos restaurada correctamente"
+echo "Laboratorio listo"
+echo "--------------------------------------"
